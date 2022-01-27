@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleSystem : MonoBehaviour
-{
-    /** Actions:
+/** 
+ * Actions:
      * 1. Attack - Deal Weapon Damage to an opponent. Perform a Trigger Check.
      * 2. Card Magic - Can be performed equal the character's INT. Spells, Abilities, or Items can be activated for MANA in this character's hand.
      * 3. Block - Opponent must attack this character. Before being dealt damage, you can discard cards to reduce damage by your character's DEF.
@@ -26,4 +26,21 @@ public class BattleSystem : MonoBehaviour
      *      INT
      *      SPD
      */
+public class BattleSystem : MonoBehaviour
+{
+    public Character[] turnOrder;
+
+    private void Start()
+    {
+        TakeTurn(turnOrder[0]);
+    }
+
+    private void TakeTurn(Character character)
+    {
+        //Spawn Attack, Magic, Block, Run Choices.
+        //Wait for player to choose.
+        //Perform Action.
+        //Go to next character turn or do another action.
+        //If Enemy, choose random action or smart action choice.
+    }
 }
