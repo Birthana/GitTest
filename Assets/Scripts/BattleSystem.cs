@@ -35,12 +35,35 @@ public class BattleSystem : MonoBehaviour
         TakeTurn(turnOrder[0]);
     }
 
+    //
+    //Spawn Attack, Magic, Block, Run Choices.
+    //Wait for player to choose.
+    //Perform Action.
+    //Go to next character turn or do another action.
+    //If Enemy, choose random action or smart action choice.
     private void TakeTurn(Character character)
     {
-        //Spawn Attack, Magic, Block, Run Choices.
-        //Wait for player to choose.
-        //Perform Action.
-        //Go to next character turn or do another action.
-        //If Enemy, choose random action or smart action choice.
+        character.Draw();
+        StartCoroutine(ChooseAction());
+    }
+
+    IEnumerator ChooseAction()
+    {
+        DisplayActions();
+        bool still_looking = true;
+        while (still_looking)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                //Physics Raycast to get Action Component & Perform Action.
+                still_looking = false;
+            }
+            yield return null;
+        }
+    }
+
+    private void DisplayActions()
+    {
+        //Spawn Attack, Magic, Block, Run Prefabs with Corresponding Prefabs.
     }
 }
