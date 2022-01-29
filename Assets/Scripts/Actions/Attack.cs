@@ -17,11 +17,26 @@ public class Attack : Action
         //Make Health Component.
         //Deal damage to target HP equal to Character's POW.
         //If enemy is blocking, reduce damage by target's DEF.
+        Debug.Log($"Attacking {target.gameObject}");
     }
 
     IEnumerator Targeting()
     {
-        //Physics Raycast to get enemy character.
-        yield return new WaitForSeconds(1.0f);
+        Debug.Log($"Target an Enemy.");
+        bool still_looking = true;
+        while (still_looking)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 100, enemyLayer);
+                if (hit)
+                {
+                    target = hit.collider.gameObject.GetComponent<Character>();
+                    still_looking = false;
+                }
+            }
+            yield return null;
+        }
     }
 }

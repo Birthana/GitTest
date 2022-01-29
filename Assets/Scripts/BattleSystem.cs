@@ -28,7 +28,11 @@ using UnityEngine;
      */
 public class BattleSystem : MonoBehaviour
 {
+    public LayerMask actionLayer;
+    public List<Action> actionPrefabs = new List<Action>();
     public Character[] turnOrder;
+    private List<Action> actions = new List<Action>();
+    private int currentIndex = 0;
 
     private void Start()
     {
@@ -44,26 +48,55 @@ public class BattleSystem : MonoBehaviour
     private void TakeTurn(Character character)
     {
         character.Draw();
-        StartCoroutine(ChooseAction());
+        StartCoroutine(ChooseAction(character));
     }
 
-    IEnumerator ChooseAction()
+    IEnumerator ChooseAction(Character character)
     {
         DisplayActions();
+        Debug.Log($"Choose an Action.");
         bool still_looking = true;
         while (still_looking)
         {
             if (Input.GetMouseButton(0))
             {
-                //Physics Raycast to get Action Component & Perform Action.
-                still_looking = false;
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 100, actionLayer);
+                if (hit)
+                {
+                    still_looking = false;
+                    Action action = hit.collider.gameObject.GetComponent<Action>();
+                    action.Perform(character);
+                }
             }
             yield return null;
         }
+        NextTurn();
+    }
+
+    private void NextTurn()
+    {
+        if (CheckIfCombatDone())
+            return;
+        currentIndex++;
+        if (currentIndex < turnOrder.Length)
+            currentIndex = 0;
+        TakeTurn(turnOrder[currentIndex]);
+    }
+
+    private bool CheckIfCombatDone()
+    {
+        bool result = true;
+
+        return result;
     }
 
     private void DisplayActions()
     {
-        //Spawn Attack, Magic, Block, Run Prefabs with Corresponding Prefabs.
+        foreach (Action action in actionPrefabs)
+        {
+            Action newAction = Instantiate(action, transform);
+            actions.Add(newAction);
+        }
     }
 }
