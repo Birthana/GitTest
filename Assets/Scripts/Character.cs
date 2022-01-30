@@ -15,6 +15,14 @@ public class Character : MonoBehaviour
         stats = GetComponent<Stats>();
     }
 
+    public Card Peep()
+    {
+        //If deck empty reShuffle drop to deck. if drop is empty. it shouldnt.
+        if (deck.Count == 0)
+            return null;
+        return deck[0];
+    }
+
     public void Draw()
     {
         if (deck.Count == 0)

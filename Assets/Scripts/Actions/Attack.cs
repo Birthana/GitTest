@@ -4,20 +4,54 @@ using UnityEngine;
 
 public class Attack : Action
 {
+    private Character character;
+    private Stats characterStats;
+    private Health characterHealth;
+    private int damage;
     private Character target;
 
-    public override void Perform(Character character)
+    public override void Perform(Character chara)
     {
+        character = chara;
+        characterStats = chara.GetComponent<Stats>();
+        characterHealth = chara.GetComponent<Health>();
         StartCoroutine(Attacking());
     }
 
     IEnumerator Attacking()
     {
+        damage = characterStats.statValues[(int)Stats.Stat_Type.POW];
         yield return StartCoroutine(Targeting());
-        //Make Health Component.
-        //Deal damage to target HP equal to Character's POW.
+        Health health = target.GetComponent<Health>();
+        Card card = character.Peep();
+        Card.Trigger trigger = (card == null) ? Card.Trigger.NONE : card.trigger;
+        character.Draw();
+        CheckTrigger(trigger);
+        health.TakeDamage(damage);
         //If enemy is blocking, reduce damage by target's DEF.
-        Debug.Log($"Attacking {target.gameObject}");
+        Debug.Log($"Attacking {target.gameObject} for {damage} damage.");
+    }
+
+    private void CheckTrigger(Card.Trigger trigger)
+    {
+        if (trigger == Card.Trigger.NONE)
+            return;
+        if (trigger == Card.Trigger.CRIT)
+        {
+            damage *= 2;
+        }
+        else if (trigger == Card.Trigger.DRAW)
+        {
+            character.Draw();
+        }
+        else if (trigger == Card.Trigger.STAND)
+        {
+            //
+        }
+        else if (trigger == Card.Trigger.HEAL)
+        {
+            characterHealth.TakeDamage(-characterStats.statValues[(int)Stats.Stat_Type.MP]);
+        }
     }
 
     IEnumerator Targeting()
