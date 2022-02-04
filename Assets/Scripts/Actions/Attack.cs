@@ -28,7 +28,7 @@ public class Attack : Action
         character.Draw();
         CheckTrigger(trigger);
         health.TakeDamage(damage);
-        //If enemy is blocking, reduce damage by target's DEF.
+        //If enemy is blocking, discard X number of cards reduce incoming damage by X * DEF.
         Debug.Log($"Attacking {target.gameObject} for {damage} damage.");
     }
 

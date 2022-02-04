@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
     private List<Card> deck = new List<Card>();
     private List<Card> hand = new List<Card>();
     private List<Card> drop = new List<Card>();
+    private bool isBlocking = false;
 
     private void Awake()
     {
@@ -30,5 +31,15 @@ public class Character : MonoBehaviour
         Card temp = deck[0];
         hand.Add(temp);
         deck.RemoveAt(0);
+    }
+
+    public void ToggleBlocking()
+    {
+        isBlocking = !isBlocking;
+    }
+
+    public bool CheckIfBlocking()
+    {
+        return isBlocking;
     }
 }
