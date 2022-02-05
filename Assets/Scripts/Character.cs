@@ -15,6 +15,8 @@ public abstract class Character : MonoBehaviour
     public Card Draw()
     {
         //Check if empty.
+        if (deck.Count == 0)
+            return null;
         Card result = deck[0];
         deck.RemoveAt(0);
         return result;

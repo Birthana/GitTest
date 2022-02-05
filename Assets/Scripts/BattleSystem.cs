@@ -11,8 +11,14 @@ public class BattleSystem : MonoBehaviour
     private List<Card> hand = new List<Card>();
     private int currentIndex = 0;
 
+    private void Start()
+    {
+        NextTurn();
+    }
+
     public void NextTurn()
     {
+        Debug.Log($"{turnOrder[currentIndex].name}'s turn.");
         turnOrder[currentIndex].TakeTurn();
         currentIndex++;
     }
@@ -21,7 +27,8 @@ public class BattleSystem : MonoBehaviour
     {
         Card.Trigger result = Card.Trigger.NONE;
         Card triggerCheck = character.Draw();
-        result = triggerCheck.GetTrigger();
+        if(triggerCheck != null)
+            result = triggerCheck.GetTrigger();
         hand.Add(triggerCheck);
         return result;
     }

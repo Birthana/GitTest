@@ -6,7 +6,7 @@ public abstract class Action : MonoBehaviour
 {
     protected Character owner;
 
-    public abstract void Perform();
+    public abstract IEnumerator Perform();
 
     public void SetOwner(Character character)
     {
