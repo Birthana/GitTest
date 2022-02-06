@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Stats))]
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
-    private Stats stats;
+    protected Stats stats;
     private List<Card> deck = new List<Card>();
-    private List<Card> hand = new List<Card>();
     private List<Card> drop = new List<Card>();
-    private bool isBlocking = false;
 
     private void Awake()
     {
         stats = GetComponent<Stats>();
+    }
+
+    public abstract void TakeTurn();
+
+    public int GetStat(Stats.Stat_Type stat_type)
+    {
+        return stats.GetStat(stat_type);
     }
 
     public Card Peep()
@@ -24,22 +29,12 @@ public class Character : MonoBehaviour
         return deck[0];
     }
 
-    public void Draw()
+    public Card Draw()
     {
         if (deck.Count == 0)
-            return;
+            return null;
         Card temp = deck[0];
-        hand.Add(temp);
         deck.RemoveAt(0);
-    }
-
-    public void ToggleBlocking()
-    {
-        isBlocking = !isBlocking;
-    }
-
-    public bool CheckIfBlocking()
-    {
-        return isBlocking;
+        return temp;
     }
 }

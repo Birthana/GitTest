@@ -9,7 +9,6 @@ public class Block : Action
 
     public override void Perform(Character chara)
     {
-        character = chara;
-        character.ToggleBlocking();
+
     }
 }

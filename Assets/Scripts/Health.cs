@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     private void Awake()
     {
         stats = GetComponent<Stats>();
-        currentHealth = stats.statValues[(int)Stats.Stat_Type.HP];
+        currentHealth = stats.GetStat(Stats.HP);
     }
 
     public void TakeDamage(int damage)
