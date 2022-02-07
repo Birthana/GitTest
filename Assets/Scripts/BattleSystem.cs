@@ -58,4 +58,9 @@ public class BattleSystem : MonoBehaviour
         }
         return playerCharacters;
     }
+
+    public bool HandIsEmpty()
+    {
+        return hand.Count == 0;
+    }
 }

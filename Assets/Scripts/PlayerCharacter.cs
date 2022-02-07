@@ -7,6 +7,7 @@ public class PlayerCharacter : Character
     public LayerMask actionLayer; 
     public List<Action> actionPrefabs = new List<Action>();
     private List<Action> actions = new List<Action>();
+    public bool isBlocking { get; set; }
 
     public override void TakeTurn()
     {

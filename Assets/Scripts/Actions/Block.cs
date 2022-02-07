@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Block : Action
 {
-    private Character character;
-
+    private BattleSystem bs;
 
     public override void Perform(Character chara)
     {
-
+        bs = FindObjectOfType<BattleSystem>();
+        if (chara is PlayerCharacter character)
+            character.isBlocking = true;
+        bs.NextTurn();
     }
 }
