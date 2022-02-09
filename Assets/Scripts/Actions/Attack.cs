@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Attack : Action
 {
-    private BattleSystem bs;
     private PlayerCharacter character;
     private Health characterHealth;
     private int damage;
@@ -12,7 +11,6 @@ public class Attack : Action
 
     public override void Perform(Character chara)
     {
-        bs = FindObjectOfType<BattleSystem>();
         character = (PlayerCharacter)chara;
         characterHealth = chara.GetComponent<Health>();
         damage = character.GetStat(Stats.POW);
@@ -43,12 +41,12 @@ public class Attack : Action
     private void DealDamage()
     {
         Health health = target.GetComponent<Health>();
-        Card.Trigger trigger = bs.TriggerCheck(character);
+        Card.Trigger trigger = character.TriggerCheck(character);
         CheckTrigger(trigger);
         health.TakeDamage(damage);
         Debug.Log($"Attacking {target.gameObject} for {damage} damage.");
         character.DeleteActions();
-        bs.NextTurn();
+        character.EndTurn();
     }
 
     private void CheckTrigger(Card.Trigger trigger)

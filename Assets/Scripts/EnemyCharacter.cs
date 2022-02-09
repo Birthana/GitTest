@@ -14,7 +14,7 @@ public class EnemyCharacter : Character
     {
         bs = FindObjectOfType<BattleSystem>();
         GetRandomPlayer();
-        StartCoroutine(Blocking((blockReduction) => DealDamage(blockReduction)));
+        StartCoroutine(Blocking());
     }
 
     private void GetRandomPlayer()
@@ -30,38 +30,40 @@ public class EnemyCharacter : Character
         Health playerHealth = player.GetComponent<Health>();
         playerHealth.TakeDamage(damage);
         Debug.Log($"Attacking {playerHealth.gameObject} for {damage} damage. Blocked {blockReduction} damage.");
-        bs.NextTurn();
+        EndTurn();
     }
 
-    private IEnumerator Blocking(Action<int> dealDamage)
+    private IEnumerator Blocking()
     {
         Debug.Log($"Choose cards to block with.");
         if (!player.isBlocking)
-            dealDamage(0);
+            DealDamage(0);
         int blockReduction = 0;
         bool still_looking = true;
         while (still_looking)
         {
             if (bs.HandIsEmpty())
                 still_looking = false;
-            if (Input.GetMouseButtonDown(0))
-            {
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 100, playerLayer);
-                RaycastHit2D hit2 = Physics2D.Raycast(mousePosition, Vector2.zero, 100, cardLayer);
-                if (hit)
-                {
-                    still_looking = false;
-                }
-                if (hit2)
-                {
-                    //Return Card to Hand. Destroy Card in Scene. Add Character Def to result.
-                    blockReduction += player.GetStat(Stats.DEF);
-                    Debug.Log($"Currenting blocking {blockReduction} damage.");
-                }
-            }
+            WaitForMouseClick(playerLayer, () => still_looking = false);
+            WaitForMouseClick(cardLayer, () => {
+                blockReduction += player.GetStat(Stats.DEF);
+                Debug.Log($"Currenting blocking {blockReduction} damage.");
+            });
             yield return null;
         }
-        dealDamage(blockReduction);
+        DealDamage(blockReduction);
+    }
+
+    private void WaitForMouseClick(LayerMask layer, System.Action doAction)
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 100, layer);
+            if (hit)
+            {
+                doAction();
+            }
+        }
     }
 }

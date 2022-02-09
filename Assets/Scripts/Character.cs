@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Stats))]
 public abstract class Character : MonoBehaviour
 {
+    public event System.Action OnEndTurn;
     protected Stats stats;
     private List<Card> deck = new List<Card>();
     private List<Card> drop = new List<Card>();
@@ -15,6 +17,8 @@ public abstract class Character : MonoBehaviour
     }
 
     public abstract void TakeTurn();
+
+    public void EndTurn() => OnEndTurn();
 
     public int GetStat(Stats.Stat_Type stat_type)
     {

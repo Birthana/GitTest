@@ -16,25 +16,25 @@ public class BattleSystem : MonoBehaviour
     private void TakeTurn(Character character)
     {
         Debug.Log($"{character.gameObject.name}'s Turn.");
-        if(character is PlayerCharacter)
-            hand.Add(character.Draw());
+        if (character is PlayerCharacter playerCharacter)
+        {
+            hand.Add(playerCharacter.Draw());
+            playerCharacter.OnTriggerCheck += AddToHand;
+        }
+        character.OnEndTurn += NextTurn;
         character.TakeTurn();
     }
 
-    public Card.Trigger TriggerCheck(Character character)
-    {
-        Card.Trigger result = Card.Trigger.NONE;
-        Card triggerCheck = character.Draw();
-        if (triggerCheck != null)
-            result = triggerCheck.trigger;
-        hand.Add(triggerCheck);
-        return result;
-    }
+    public void AddToHand(Card card) => hand.Add(card);
 
     public void NextTurn()
     {
         if (CheckIfCombatDone())
             return;
+        Character currentCharcter = turnOrder[currentIndex];
+        currentCharcter.OnEndTurn -= NextTurn;
+        if (currentCharcter is PlayerCharacter playerCharacter)
+            playerCharacter.OnTriggerCheck -= AddToHand;
         currentIndex++;
         if (currentIndex >= turnOrder.Length)
             currentIndex = 0;
@@ -59,7 +59,7 @@ public class BattleSystem : MonoBehaviour
         return playerCharacters;
     }
 
-    public bool HandIsEmpty()
+    public bool HandIsEmpty() 
     {
         return hand.Count == 0;
     }

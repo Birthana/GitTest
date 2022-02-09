@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCharacter : Character
 {
+    public event System.Action<Card> OnTriggerCheck;
     public LayerMask actionLayer; 
     public List<Action> actionPrefabs = new List<Action>();
     private List<Action> actions = new List<Action>();
@@ -13,6 +15,16 @@ public class PlayerCharacter : Character
     {
         SpawnActions();
         StartCoroutine(ChooseAction());
+    }
+
+    public Card.Trigger TriggerCheck(Character character)
+    {
+        Card.Trigger result = Card.Trigger.NONE;
+        Card triggerCheck = character.Draw();
+        if (triggerCheck != null)
+            result = triggerCheck.trigger;
+        OnTriggerCheck(triggerCheck);
+        return result;
     }
 
     private void SpawnActions()
