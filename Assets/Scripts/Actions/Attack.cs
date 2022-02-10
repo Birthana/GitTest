@@ -41,11 +41,10 @@ public class Attack : Action
     private void DealDamage()
     {
         Health health = target.GetComponent<Health>();
-        Card.Trigger trigger = character.TriggerCheck(character);
+        Card.Trigger trigger = character.TriggerCheck();
         CheckTrigger(trigger);
         health.TakeDamage(damage);
         Debug.Log($"Attacking {target.gameObject} for {damage} damage.");
-        character.DeleteActions();
         character.EndTurn();
     }
 

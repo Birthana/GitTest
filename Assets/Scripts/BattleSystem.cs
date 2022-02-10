@@ -18,7 +18,7 @@ public class BattleSystem : MonoBehaviour
         Debug.Log($"{character.gameObject.name}'s Turn.");
         if (character is PlayerCharacter playerCharacter)
         {
-            hand.Add(playerCharacter.Draw());
+            AddToHand(playerCharacter.Draw());
             playerCharacter.OnTriggerCheck += AddToHand;
         }
         character.OnEndTurn += NextTurn;
@@ -34,7 +34,10 @@ public class BattleSystem : MonoBehaviour
         Character currentCharcter = turnOrder[currentIndex];
         currentCharcter.OnEndTurn -= NextTurn;
         if (currentCharcter is PlayerCharacter playerCharacter)
+        {
             playerCharacter.OnTriggerCheck -= AddToHand;
+            playerCharacter.DeleteActions();
+        }
         currentIndex++;
         if (currentIndex >= turnOrder.Length)
             currentIndex = 0;

@@ -30,6 +30,7 @@ public class EnemyCharacter : Character
         Health playerHealth = player.GetComponent<Health>();
         playerHealth.TakeDamage(damage);
         Debug.Log($"Attacking {playerHealth.gameObject} for {damage} damage. Blocked {blockReduction} damage.");
+        player.isBlocking = false;
         EndTurn();
     }
 
@@ -37,7 +38,10 @@ public class EnemyCharacter : Character
     {
         Debug.Log($"Choose cards to block with.");
         if (!player.isBlocking)
+        {
             DealDamage(0);
+            yield break;
+        }
         int blockReduction = 0;
         bool still_looking = true;
         while (still_looking)

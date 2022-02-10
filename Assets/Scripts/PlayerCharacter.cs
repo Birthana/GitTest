@@ -17,10 +17,10 @@ public class PlayerCharacter : Character
         StartCoroutine(ChooseAction());
     }
 
-    public Card.Trigger TriggerCheck(Character character)
+    public Card.Trigger TriggerCheck()
     {
         Card.Trigger result = Card.Trigger.NONE;
-        Card triggerCheck = character.Draw();
+        Card triggerCheck = Draw();
         if (triggerCheck != null)
             result = triggerCheck.trigger;
         OnTriggerCheck(triggerCheck);

@@ -153,3 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3b6757cb34c194e9ef8a0fa2405d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
