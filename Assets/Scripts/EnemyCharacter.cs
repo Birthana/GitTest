@@ -8,38 +8,36 @@ public class EnemyCharacter : Character
     public LayerMask cardLayer;
     public LayerMask playerLayer;
     private BattleSystem bs;
-    private PlayerCharacter player;
 
     public override void TakeTurn()
     {
         bs = FindObjectOfType<BattleSystem>();
-        GetRandomPlayer();
-        StartCoroutine(Blocking());
+        PlayerCharacter player = GetRandomPlayer();
+        StartCoroutine(Blocking(player));
     }
 
-    private void GetRandomPlayer()
+    private PlayerCharacter GetRandomPlayer()
     {
         List<PlayerCharacter> playerCharacters = bs.GetPlayerCharacters();
         int rngIndex = UnityEngine.Random.Range(0, playerCharacters.Count);
-        player = playerCharacters[rngIndex];
+        return playerCharacters[rngIndex];
     }
 
-    private void DealDamage(int blockReduction)
+    private void DealDamage(Health targetHP, int blockReduction)
     {
         int damage = Mathf.Max(0, stats.GetStat(Stats.POW) - blockReduction);
-        Health playerHealth = player.GetComponent<Health>();
-        playerHealth.TakeDamage(damage);
-        Debug.Log($"Attacking {playerHealth.gameObject} for {damage} damage. Blocked {blockReduction} damage.");
-        player.isBlocking = false;
+        targetHP.TakeDamage(damage);
+        Debug.Log($"Attacking {targetHP.gameObject} for {damage} damage. Blocked {blockReduction} damage.");
         EndTurn();
     }
 
-    private IEnumerator Blocking()
+    private IEnumerator Blocking(PlayerCharacter player)
     {
         Debug.Log($"Choose cards to block with.");
+        Health targetHP = player.GetComponent<Health>();
         if (!player.isBlocking)
         {
-            DealDamage(0);
+            DealDamage(targetHP, 0);
             yield break;
         }
         int blockReduction = 0;
@@ -48,26 +46,16 @@ public class EnemyCharacter : Character
         {
             if (bs.HandIsEmpty())
                 still_looking = false;
-            WaitForMouseClick(playerLayer, () => still_looking = false);
-            WaitForMouseClick(cardLayer, () => {
+            Utility.WaitForMouseClick(playerLayer, () => {
+                still_looking = false;
+                player.isBlocking = false;
+            });
+            Utility.WaitForMouseClick(cardLayer, () => {
                 blockReduction += player.GetStat(Stats.DEF);
                 Debug.Log($"Currenting blocking {blockReduction} damage.");
             });
             yield return null;
         }
-        DealDamage(blockReduction);
-    }
-
-    private void WaitForMouseClick(LayerMask layer, System.Action doAction)
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 100, layer);
-            if (hit)
-            {
-                doAction();
-            }
-        }
+        DealDamage(targetHP, blockReduction);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerCharacter : Character
 {
-    public event System.Action<Card> OnTriggerCheck;
+    public event System.Action<Card> OnHandChange;
     public LayerMask actionLayer; 
     public List<Action> actionPrefabs = new List<Action>();
     private List<Action> actions = new List<Action>();
@@ -13,8 +13,14 @@ public class PlayerCharacter : Character
 
     public override void TakeTurn()
     {
+        OnHandChange(Draw());
         SpawnActions();
         StartCoroutine(ChooseAction());
+    }
+
+    public void DrawTrigger()
+    {
+        OnHandChange(Draw());
     }
 
     public Card.Trigger TriggerCheck()
@@ -23,7 +29,7 @@ public class PlayerCharacter : Character
         Card triggerCheck = Draw();
         if (triggerCheck != null)
             result = triggerCheck.trigger;
-        OnTriggerCheck(triggerCheck);
+        OnHandChange(triggerCheck);
         return result;
     }
 
@@ -51,16 +57,11 @@ public class PlayerCharacter : Character
         bool still_looking = true;
         while (still_looking)
         {
-            if (Input.GetMouseButton(0))
+            GameObject temp = Utility.WaitForMouseClick(actionLayer, () => still_looking = false);
+            if(temp != null)
             {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 100, actionLayer);
-                if (hit)
-                {
-                    still_looking = false;
-                    Action action = hit.collider.gameObject.GetComponent<Action>();
-                    action.Perform(this);
-                }
+                Action action = temp.GetComponent<Action>();
+                action.Perform(this);
             }
             yield return null;
         }

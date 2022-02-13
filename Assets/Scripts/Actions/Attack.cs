@@ -1,65 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Attack : Action
 {
-    private PlayerCharacter character;
-    private Health characterHealth;
-    private int damage;
-    private Character target;
-
     public override void Perform(Character chara)
     {
-        character = (PlayerCharacter)chara;
-        characterHealth = chara.GetComponent<Health>();
-        damage = character.GetStat(Stats.POW);
-        StartCoroutine(Attacking());
+        PlayerCharacter character = (PlayerCharacter)chara;
+        int damage = character.GetStat(Stats.POW);
+        StartCoroutine(Attacking(character, damage));
     }
 
-    IEnumerator Attacking()
+    IEnumerator Attacking(PlayerCharacter attackCharacter, int damage)
     {
         Debug.Log($"Target an Enemy.");
         bool still_looking = true;
         while (still_looking)
         {
-            if (Input.GetMouseButton(0))
+            GameObject temp = Utility.WaitForMouseClick(enemyLayer, () => still_looking = false );
+            if (temp != null)
             {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 100, enemyLayer);
-                if (hit)
-                {
-                    target = hit.collider.gameObject.GetComponent<Character>();
-                    still_looking = false;
-                    DealDamage();
-                }
+                Character target = temp.GetComponent<Character>();
+                DealDamage(attackCharacter, target, damage);
             }
             yield return null;
         }
     }
 
-    private void DealDamage()
+    private void DealDamage(PlayerCharacter attackCharacter, Character defendCharacter, int damage)
     {
-        Health health = target.GetComponent<Health>();
-        Card.Trigger trigger = character.TriggerCheck();
-        CheckTrigger(trigger);
-        health.TakeDamage(damage);
-        Debug.Log($"Attacking {target.gameObject} for {damage} damage.");
-        character.EndTurn();
+        damage = CheckTrigger(attackCharacter, damage);
+        defendCharacter.ChangeHealth(damage);
+        Debug.Log($"Attacking {defendCharacter.gameObject} for {damage} damage.");
+        attackCharacter.EndTurn();
     }
 
-    private void CheckTrigger(Card.Trigger trigger)
+    private int CheckTrigger(PlayerCharacter attackCharacter, int damage)
     {
+        Card.Trigger trigger = attackCharacter.TriggerCheck();
         if (trigger == Card.Trigger.NONE)
-            return;
+            return damage;
         if (trigger == Card.Trigger.CRIT)
         {
-            damage *= 2;
+            return damage *= 2;
         }
         else if (trigger == Card.Trigger.DRAW)
         {
-            Card newCard = character.Draw();
-            //Add to BS.
+            attackCharacter.DrawTrigger();
         }
         else if (trigger == Card.Trigger.STAND)
         {
@@ -67,7 +55,8 @@ public class Attack : Action
         }
         else if (trigger == Card.Trigger.HEAL)
         {
-            characterHealth.TakeDamage(-character.GetStat(Stats.MP));
+            attackCharacter.ChangeHealth(-attackCharacter.GetStat(Stats.MP));
         }
+        return damage;
     }
 }

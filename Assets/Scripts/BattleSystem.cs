@@ -6,21 +6,18 @@ public class BattleSystem : MonoBehaviour
 {
     public Character[] turnOrder;
     private int currentIndex = 0;
+    [SerializeField]
     private List<Card> hand = new List<Card>();
 
     private void Start()
     {
+        SetEvents();
         TakeTurn(turnOrder[0]);
     }
 
     private void TakeTurn(Character character)
     {
         Debug.Log($"{character.gameObject.name}'s Turn.");
-        if (character is PlayerCharacter playerCharacter)
-        {
-            AddToHand(playerCharacter.Draw());
-            playerCharacter.OnTriggerCheck += AddToHand;
-        }
         character.OnEndTurn += NextTurn;
         character.TakeTurn();
     }
@@ -31,17 +28,28 @@ public class BattleSystem : MonoBehaviour
     {
         if (CheckIfCombatDone())
             return;
-        Character currentCharcter = turnOrder[currentIndex];
-        currentCharcter.OnEndTurn -= NextTurn;
-        if (currentCharcter is PlayerCharacter playerCharacter)
-        {
-            playerCharacter.OnTriggerCheck -= AddToHand;
-            playerCharacter.DeleteActions();
-        }
+        ResetEvents();
         currentIndex++;
         if (currentIndex >= turnOrder.Length)
             currentIndex = 0;
         TakeTurn(turnOrder[currentIndex]);
+    }
+
+    private void SetEvents()
+    {
+        foreach (Character character in turnOrder)
+        {
+            if (character is PlayerCharacter playerCharacter)
+                playerCharacter.OnHandChange += AddToHand;
+        }
+    }
+
+    private void ResetEvents()
+    {
+        Character currentCharacter = turnOrder[currentIndex];
+        currentCharacter.OnEndTurn -= NextTurn;
+        if(currentCharacter is PlayerCharacter playerCharacter)
+            playerCharacter.DeleteActions();
     }
 
     private bool CheckIfCombatDone()

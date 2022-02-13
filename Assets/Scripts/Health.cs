@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
+        GetComponent<Character>().OnHealthChange += TakeDamage;
         stats = GetComponent<Stats>();
         currentHealth = stats.GetStat(Stats.HP);
     }
