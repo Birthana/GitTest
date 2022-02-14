@@ -38,25 +38,8 @@ public class Attack : Action
 
     private int CheckTrigger(PlayerCharacter attackCharacter, int damage)
     {
-        Card.Trigger trigger = attackCharacter.TriggerCheck();
-        if (trigger == Card.Trigger.NONE)
-            return damage;
-        if (trigger == Card.Trigger.CRIT)
-        {
-            return damage *= 2;
-        }
-        else if (trigger == Card.Trigger.DRAW)
-        {
-            attackCharacter.DrawTrigger();
-        }
-        else if (trigger == Card.Trigger.STAND)
-        {
-            //
-        }
-        else if (trigger == Card.Trigger.HEAL)
-        {
-            attackCharacter.ChangeHealth(-attackCharacter.GetStat(Stats.MP));
-        }
-        return damage;
+        Trigger trigger = attackCharacter.TriggerCheck();
+        int result = trigger.Perform(attackCharacter, damage);
+        return result;
     }
 }
