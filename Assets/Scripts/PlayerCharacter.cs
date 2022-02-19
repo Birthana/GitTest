@@ -28,7 +28,7 @@ public class PlayerCharacter : Character
         Trigger result = null;
         Card triggerCheck = Draw();
         if (triggerCheck != null)
-            result = triggerCheck.trigger;
+            result = triggerCheck.GetTrigger();
         OnHandChange(triggerCheck);
         return result;
     }
