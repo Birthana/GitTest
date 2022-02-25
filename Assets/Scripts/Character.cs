@@ -10,6 +10,7 @@ public abstract class Character : MonoBehaviour
     public event System.Action OnEndTurn;
     public event Action<int> OnHealthChange;
     protected Stats stats;
+    [SerializeField]
     private List<Card> deck = new List<Card>();
     private List<Card> drop = new List<Card>();
 
@@ -44,5 +45,10 @@ public abstract class Character : MonoBehaviour
         Card temp = deck[0];
         deck.RemoveAt(0);
         return temp;
+    }
+
+    public void AddCardToDeck(Card card)
+    {
+        deck.Add(card);
     }
 }
