@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Target : ScriptableObject
 {
-    public abstract IEnumerator Targeting(System.Action<List<GameObject>> doEffect);
+    public abstract IEnumerator Targeting(Character self, System.Action<List<Character>> doEffect);
 
     public abstract string GetCardDescription();
 }

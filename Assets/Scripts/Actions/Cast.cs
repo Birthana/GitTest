@@ -31,7 +31,7 @@ public class Cast : Action
             {
                 numberOfCardsToCast--;
                 Debug.Log($"Casting this {card.GetComponent<CardDisplay>().card.name}.");
-                yield return card.GetComponent<CardDisplay>().card.DoEffect(attackCharacter);
+                yield return StartCoroutine(card.GetComponent<CardDisplay>().DoEffect(attackCharacter));
             }
             yield return null;
         }

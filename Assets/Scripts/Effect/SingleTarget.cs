@@ -6,20 +6,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Single", menuName = "Target/Single")]
 public class SingleTarget : Target
 {
-    public enum CharacterType { Ally, Enemy, Anyone };
+    public enum CharacterType { Ally = 3, Enemy = 6, Anyone };
     public CharacterType character;
 
-    public override IEnumerator Targeting(Action<List<GameObject>> doEffect)
+    public override IEnumerator Targeting(Character self, Action<List<Character>> doEffect)
     {
-        //Get LayerMask for Player & Enemy.
-        LayerMask layer = 0;
+        Debug.Log("Targeting...");
+        int layer = (int)character;
         bool still_looking = true;
         while (still_looking)
         {
-            GameObject hit = Utility.WaitForMouseClick(layer, () => still_looking = false);
+            GameObject hit = Utility.WaitForMouseClick(1 << layer, () => still_looking = false);
             if (hit != null)
             {
-                doEffect(new List<GameObject>() { hit });
+                doEffect(new List<Character>() { hit.GetComponent<Character>() });
             }
             yield return null;
         }

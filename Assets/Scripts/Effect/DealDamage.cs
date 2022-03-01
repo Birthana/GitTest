@@ -3,23 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "DealDamage", menuName = "Effect/DealDamage")]
 public class DealDamage : Effect
 {
     public int damage;
     public Target target;
 
-    public override void CardEffect(List<GameObject> characters)
+    public override void CardEffect(List<Character> characters)
     {
-        foreach (GameObject character in characters)
+        foreach (Character character in characters)
         {
-            Character target = character.GetComponent<Character>();
-            target.ChangeHealth(damage);
+            Debug.Log($"Dealing {damage} to {character}.");
+            character.ChangeHealth(damage);
         }
     }
 
-    public override IEnumerator DoEffect(Character character)
+    //Start this Coroutine to start card effect.
+    public override IEnumerator DoEffect(MonoBehaviour mono,Character character)
     {
-        yield return StartCoroutine(target.Targeting(CardEffect));
+        yield return mono.StartCoroutine(target.Targeting(character, CardEffect));
     }
 
     public override string GetCardEffectDescription()

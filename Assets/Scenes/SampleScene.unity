@@ -298,16 +298,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards:
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
-  - {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +452,6 @@ GameObject:
   - component: {fileID: 1230940045}
   - component: {fileID: 1230940044}
   - component: {fileID: 1230940047}
-  - component: {fileID: 1230940048}
   m_Layer: 8
   m_Name: Card
   m_TagString: Untagged
@@ -565,21 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd63a39ba545f1e4abfd52d3b7ea4372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 11400000, guid: 241b52f5c5451a044b6269b56f8a00a1, type: 2}
---- !u!114 &1230940048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1230940043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f5f3643fffe164c82cdebb3a7150f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  target: {fileID: 11400000, guid: a46cd2082fbcde14f93961ddcc50e92e, type: 2}
+  card: {fileID: 11400000, guid: 49511aa4ae930e74c91244a45a3ab2fc, type: 2}
 --- !u!114 &1581936859 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4367558469212725711, guid: 7f03c1ba0503d7648b6af9c51918323c, type: 3}
