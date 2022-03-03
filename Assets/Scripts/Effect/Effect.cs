@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class Effect : ScriptableObject
 {
-    public abstract void CardEffect(List<Character> characters);
+    public Target target;
 
-    public abstract IEnumerator DoEffect(MonoBehaviour mono, Character Character);
+    public IEnumerator DoEffect(MonoBehaviour mono, Character character)
+    {
+        yield return mono.StartCoroutine(target.Targeting(character, CardEffect));
+    }
+
+    public abstract void CardEffect(List<Character> characters);
 
     public abstract string GetCardEffectDescription();
 }

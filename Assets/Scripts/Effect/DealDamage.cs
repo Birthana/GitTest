@@ -7,7 +7,6 @@ using UnityEngine;
 public class DealDamage : Effect
 {
     public int damage;
-    public Target target;
 
     public override void CardEffect(List<Character> characters)
     {
@@ -16,12 +15,6 @@ public class DealDamage : Effect
             Debug.Log($"Dealing {damage} to {character}.");
             character.ChangeHealth(damage);
         }
-    }
-
-    //Start this Coroutine to start card effect.
-    public override IEnumerator DoEffect(MonoBehaviour mono,Character character)
-    {
-        yield return mono.StartCoroutine(target.Targeting(character, CardEffect));
     }
 
     public override string GetCardEffectDescription()

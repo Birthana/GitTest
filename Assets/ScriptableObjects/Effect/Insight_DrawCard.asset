@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83018ab41a3958d4b97211906bbc8273, type: 3}
-  m_Name: Fireball
+  m_Script: {fileID: 11500000, guid: 1a08da1c01695ba4d907d6dbf25ebbd8, type: 3}
+  m_Name: Insight_DrawCard
   m_EditorClassIdentifier: 
-  trigger: {fileID: 11400000, guid: 69c1e4c8eb8fb3843ad9cf3cbd5b71c9, type: 2}
-  MPCost: 2
-  effect: {fileID: 11400000, guid: 7938f34ae6feed24db121b422b693130, type: 2}
+  target: {fileID: 11400000, guid: df6bf294096b9f045be79964837df428, type: 2}
+  numberOfCards: 3

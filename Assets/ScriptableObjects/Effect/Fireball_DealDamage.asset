@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93f5f3643fffe164c82cdebb3a7150f6, type: 3}
-  m_Name: DealDamage
+  m_Name: Fireball_DealDamage
   m_EditorClassIdentifier: 
-  damage: 15
   target: {fileID: 11400000, guid: a46cd2082fbcde14f93961ddcc50e92e, type: 2}
+  damage: 15
