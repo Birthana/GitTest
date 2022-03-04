@@ -6,11 +6,11 @@ public class BattleSystem : MonoBehaviour
 {
     public Character[] turnOrder;
     private int currentIndex = 0;
-    [SerializeField]
-    private List<Card> hand = new List<Card>();
+    private Hand hand;
 
     private void Start()
     {
+        hand = GetComponent<Hand>();
         SetEvents();
         TakeTurn(turnOrder[0]);
     }
@@ -22,7 +22,15 @@ public class BattleSystem : MonoBehaviour
         character.TakeTurn();
     }
 
-    public void AddToHand(Card card) => hand.Add(card);
+    public void AddToHand(Card card)
+    {
+        hand.AddToHand(card);
+    }
+
+    public void RemoveFromHand(CardDisplay card)
+    {
+        hand.RemoveFromHand(card);
+    }
 
     public void NextTurn()
     {
@@ -72,6 +80,6 @@ public class BattleSystem : MonoBehaviour
 
     public bool HandIsEmpty() 
     {
-        return hand.Count == 0;
+        return hand.IsEmpty();
     }
 }

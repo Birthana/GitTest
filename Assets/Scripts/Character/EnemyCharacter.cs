@@ -50,10 +50,14 @@ public class EnemyCharacter : Character
                 still_looking = false;
                 player.isBlocking = false;
             });
-            Utility.WaitForMouseClick(cardLayer, () => {
+            GameObject card = Utility.WaitForMouseClick(cardLayer, () => { });
+            if (card != null)
+            {
                 blockReduction += player.GetStat(Stats.DEF);
                 Debug.Log($"Currenting blocking {blockReduction} damage.");
-            });
+                bs.RemoveFromHand(card.GetComponent<CardDisplay>());
+                Destroy(card);
+            }
             yield return null;
         }
         DealDamage(targetHP, blockReduction);
