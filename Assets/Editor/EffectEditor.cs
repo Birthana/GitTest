@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+//[CustomEditor(typeof(Effect))]
 public class EffectEditor : Editor
 {
+    /*
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
@@ -21,4 +23,5 @@ public class EffectEditor : Editor
         }
         serializedObject.ApplyModifiedProperties();
     }
+    */
 }

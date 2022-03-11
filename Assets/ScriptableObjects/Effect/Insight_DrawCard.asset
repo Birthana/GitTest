@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Insight_DrawCard
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: df6bf294096b9f045be79964837df428, type: 2}
+  condition: {fileID: 11400000, guid: b37ddf250dbcaf644850f7d58fb4bad0, type: 2}
   numberOfCards: 3

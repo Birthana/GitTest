@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: {fileID: 11400000, guid: 028c1b22164d3ed488d8f868d79114ea, type: 2}
   MPCost: 4
-  effect: {fileID: 11400000, guid: 6b3b93c165c160d4697e5dafdda6cb20, type: 2}
+  effects:
+  - {fileID: 11400000, guid: 6b3b93c165c160d4697e5dafdda6cb20, type: 2}

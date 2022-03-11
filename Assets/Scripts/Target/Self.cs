@@ -8,7 +8,7 @@ public class Self : Target
 {
     public override IEnumerator Targeting(Character self, Action<List<Character>> doEffect)
     {
-        Debug.Log($"Drawing... ");
+        Debug.Log($"Self... ");
         doEffect(new List<Character>() { self });
         yield return null;
     }

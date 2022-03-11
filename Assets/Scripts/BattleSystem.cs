@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class BattleSystem : MonoBehaviour
 {
-    public Character[] turnOrder;
+    public List<Character> turnOrder = new List<Character>();
     private int currentIndex = 0;
     private Hand hand;
 
@@ -13,6 +14,11 @@ public class BattleSystem : MonoBehaviour
         hand = GetComponent<Hand>();
         SetEvents();
         TakeTurn(turnOrder[0]);
+    }
+
+    public void AddToTurnOrder(Character character)
+    {
+        turnOrder.Add(character);
     }
 
     private void TakeTurn(Character character)
@@ -38,7 +44,7 @@ public class BattleSystem : MonoBehaviour
             return;
         ResetEvents();
         currentIndex++;
-        if (currentIndex >= turnOrder.Length)
+        if (currentIndex >= turnOrder.Count)
             currentIndex = 0;
         TakeTurn(turnOrder[currentIndex]);
     }

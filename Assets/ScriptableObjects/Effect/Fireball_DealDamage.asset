@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Fireball_DealDamage
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: a46cd2082fbcde14f93961ddcc50e92e, type: 2}
+  condition: {fileID: 0}
   damage: 15

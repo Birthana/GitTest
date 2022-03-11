@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Card))]
+//[CustomEditor(typeof(Card))]
 public class CardEditor : Editor
 {
+    /*
     SerializedProperty trigger;
     SerializedProperty mpCost;
     SerializedProperty effect;
@@ -46,4 +47,5 @@ public class CardEditor : Editor
 
         serializedObject.ApplyModifiedProperties();
     }
+    */
 }

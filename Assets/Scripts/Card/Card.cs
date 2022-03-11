@@ -8,7 +8,7 @@ public class Card : ScriptableObject
 {
     public Trigger trigger;
     public int MPCost;
-    public Effect effect;
+    public List<Effect> effects;
 
     public Trigger GetTrigger()
     {

@@ -7,6 +7,7 @@ using UnityEngine;
 public abstract class Effect : ScriptableObject
 {
     public Target target;
+    public Condition condition;
 
     public IEnumerator DoEffect(MonoBehaviour mono, Character character)
     {
