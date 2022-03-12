@@ -16,4 +16,4 @@ MonoBehaviour:
   MPCost: 10
   effects:
   - {fileID: 11400000, guid: 41c018cd898f5b84e89efa7630b194e3, type: 2}
-  - {fileID: 11400000, guid: 7938f34ae6feed24db121b422b693130, type: 2}
+  - {fileID: 11400000, guid: 601b280d6a875e640a849059a188a18e, type: 2}
