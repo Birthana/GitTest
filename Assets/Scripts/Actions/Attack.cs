@@ -22,6 +22,7 @@ public class Attack : Action
             if (temp != null)
             {
                 Character target = temp.GetComponent<Character>();
+                yield return StartCoroutine(attackCharacter.OnAttackEffects());
                 DealDamage(attackCharacter, target, damage);
             }
             yield return null;

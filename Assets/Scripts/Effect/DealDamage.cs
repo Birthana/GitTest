@@ -21,4 +21,5 @@ public class DealDamage : Effect
     {
         return $"{target.GetCardDescription()} is dealt {damage} damage.";
     }
+
 }
