@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbb25eba71d9d646bfe0f680124e6c2, type: 3}
   m_Name: Reflection_Summon
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 11400000, guid: df6bf294096b9f045be79964837df428, type: 2}
   condition: {fileID: 0}
-  character: {fileID: 0}
+  keyword: {fileID: 0}
+  character: {fileID: 5055248500014149566, guid: bad595c399b84c842bcdef8dc5226f9e, type: 3}

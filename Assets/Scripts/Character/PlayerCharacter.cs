@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerCharacter : Character
 {
     public event System.Action<Card> OnHandChange;
+    public event Func<MonoBehaviour, Character, IEnumerator> OnAttack;
     public LayerMask actionLayer; 
     public List<Action> actionPrefabs = new List<Action>();
     private List<Action> actions = new List<Action>();
@@ -13,7 +14,7 @@ public class PlayerCharacter : Character
 
     public override void TakeTurn()
     {
-        OnHandChange(Draw());
+        OnHandChange?.Invoke(Draw());
         SpawnActions();
         StartCoroutine(ChooseAction());
     }
@@ -64,6 +65,16 @@ public class PlayerCharacter : Character
                 action.Perform(this);
             }
             yield return null;
+        }
+    }
+
+    public IEnumerator OnAttackEffects()
+    {
+        Debug.Log($"OnAttackEffects");
+        yield return new WaitForEndOfFrame();
+        foreach (Delegate effect in OnAttack.GetInvocationList())
+        {
+            yield return effect.DynamicInvoke(this,this);
         }
     }
 }

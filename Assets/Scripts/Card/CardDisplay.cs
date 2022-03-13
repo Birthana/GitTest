@@ -32,7 +32,11 @@ public class CardDisplay : MonoBehaviour
         List<Effect> effects = card.effects;
         foreach (Effect effect in effects)
         {
+            if (effect is Summon summon)
+                summon.SetEffects(effects);
             yield return StartCoroutine(effect.DoEffect(this, character));
+            if (effect is Summon)
+                break;
         }
     }
 }
