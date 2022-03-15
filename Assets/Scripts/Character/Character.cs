@@ -8,6 +8,7 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
     public event System.Action OnEndTurn;
+    public event System.Action OnDeath;
     public event Action<int> OnHealthChange;
     protected Stats stats;
     [SerializeField]
@@ -23,11 +24,18 @@ public abstract class Character : MonoBehaviour
 
     public void EndTurn() => OnEndTurn();
 
+    public void Die() => OnDeath();
+
     public void ChangeHealth(int healthChange) => OnHealthChange(healthChange);
 
     public int GetStat(Stats.Stat_Type stat_type)
     {
         return stats.GetStat(stat_type);
+    }
+
+    public void ChangeStat(Stats.Stat_Type stat_type, int amount)
+    {
+        stats.ChangeStat(stat_type, amount);
     }
 
     public Card Peep()
