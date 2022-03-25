@@ -16,3 +16,4 @@ MonoBehaviour:
   MPCost: 2
   effects:
   - {fileID: 11400000, guid: 7938f34ae6feed24db121b422b693130, type: 2}
+  cardEffect: Deal 15 Damage to target enemy.

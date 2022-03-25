@@ -17,9 +17,4 @@ public class DealDamage : Effect
         }
     }
 
-    public override string GetCardEffectDescription()
-    {
-        return $"{target.GetCardDescription()} is dealt {damage} damage.";
-    }
-
 }

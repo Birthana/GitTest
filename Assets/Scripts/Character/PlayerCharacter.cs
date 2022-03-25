@@ -29,8 +29,10 @@ public class PlayerCharacter : Character
         Trigger result = null;
         Card triggerCheck = Draw();
         if (triggerCheck != null)
+        {
             result = triggerCheck.GetTrigger();
-        OnHandChange(triggerCheck);
+            OnHandChange?.Invoke(triggerCheck);
+        }
         return result;
     }
 
@@ -72,6 +74,8 @@ public class PlayerCharacter : Character
     {
         Debug.Log($"OnAttackEffects");
         yield return new WaitForEndOfFrame();
+        if (OnAttack == null)
+            yield break;
         foreach (Delegate effect in OnAttack.GetInvocationList())
         {
             yield return effect.DynamicInvoke(this,this);

@@ -16,6 +16,4 @@ public abstract class Effect : ScriptableObject
     }
 
     public abstract void CardEffect(List<Character> characters);
-
-    public abstract string GetCardEffectDescription();
 }
