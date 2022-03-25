@@ -13,9 +13,10 @@ public class Summon : Effect
 
     public override void CardEffect(List<Character> characters)
     {
-        //Reduce Int by 1. When leaves, gain 1 Int.
+        ReduceINT(characters[0]);
         bs = FindObjectOfType<BattleSystem>();
         Character newCharacter = Instantiate(character, characters[0].transform);
+        newCharacter.OnDeath += IncreaseINT;
         for (int i = 1; i < effects.Count; i++)
         {
             if(effects[i].keyword != null)
@@ -24,9 +25,14 @@ public class Summon : Effect
         bs.AddToTurnOrder(newCharacter);
     }
 
-    public override string GetCardEffectDescription()
+    public void ReduceINT(Character chara)
     {
-        throw new System.NotImplementedException();
+        chara.ChangeStat(Stats.INT, -1);
+    }
+
+    public void IncreaseINT(Character chara)
+    {
+        chara.ChangeStat(Stats.INT, 1);
     }
 
     public void SetEffects(List<Effect> effects)

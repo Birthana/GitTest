@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5883382648382650893}
   - component: {fileID: 5883382648382650892}
   - component: {fileID: 5883382648382650895}
+  - component: {fileID: -6703108220140409413}
   m_Layer: 8
   m_Name: Card
   m_TagString: Untagged
@@ -127,6 +128,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: {fileID: 1881171682613204956}
   _card: {fileID: 0}
+--- !u!210 &-6703108220140409413
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883382648382650891}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &8187832570539611025
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,8 +174,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 0.011}
-  m_SizeDelta: {x: 0.9426, y: 0.918}
+  m_AnchoredPosition: {x: -0, y: 0.3791}
+  m_SizeDelta: {x: 0.9426, y: 0.1819}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2261601234612571850
 MeshRenderer:

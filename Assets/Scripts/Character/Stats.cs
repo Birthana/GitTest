@@ -20,6 +20,7 @@ public class Stats : MonoBehaviour
         Stat_Type.DEF, Stat_Type.INT, Stat_Type.SPD };
     [SerializeField]
     private List<int> maxStatValues = new List<int>() { 0, 0, 0, 0, 0, 0};
+    [SerializeField]
     private List<int> currentStatValues = new List<int>() { 0, 0, 0, 0, 0, 0};
 
     private void Awake()

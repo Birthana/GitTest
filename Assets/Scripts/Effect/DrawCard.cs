@@ -19,9 +19,4 @@ public class DrawCard : Effect
         }
     }
 
-
-    public override string GetCardEffectDescription()
-    {
-        return $"";
-    }
 }
