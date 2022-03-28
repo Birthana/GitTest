@@ -13,9 +13,11 @@ public class Dragger : MonoBehaviour
 
     private void Update()
     {
-        CheckIfDragging();
+        if(currentCard == null)
+            CheckIfDragging();
+        else
+            CheckIfDropping();
         Drag();
-        CheckIfDropping();
     }
 
     private RaycastHit2D GetRaycast(LayerMask layer)
@@ -40,8 +42,8 @@ public class Dragger : MonoBehaviour
             if (hit)
             {
                 previousStack = hit.transform.parent.GetComponent<CardStack>();
+                hit.transform.GetComponent<SortingGroup>().sortingOrder = 100;
                 currentCard = hit.transform;
-                currentCard.GetComponent<SortingGroup>().sortingOrder = 100;
             }
         }
     }

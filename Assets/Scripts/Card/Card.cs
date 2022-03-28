@@ -12,6 +12,21 @@ public class Card : ScriptableObject
     [TextArea(3, 5)]
     public string cardEffect;
 
+    [SerializeField]
+    private List<Stats.Stat_Type> stat_types = new List<Stats.Stat_Type>();
+    [SerializeField]
+    private List<int> stat_amount = new List<int>();
+
+    public List<Stats.Stat_Type> GetStat_Types()
+    {
+        return stat_types;
+    }
+
+    public int GetStatAmount(int i)
+    {
+        return stat_amount[i];
+    }
+
     public Trigger GetTrigger()
     {
         return trigger;
