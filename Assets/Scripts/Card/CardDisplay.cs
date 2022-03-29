@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using TMPro;
 
 public class CardDisplay : MonoBehaviour
 {
+    public event System.Action<Card> OnCardChange;
     public TextMeshPro cardName;
     [SerializeField]
     private Card _card;
@@ -18,7 +20,8 @@ public class CardDisplay : MonoBehaviour
         set 
         {
             _card = value;
-            DisplayCard();
+            OnCardChange?.Invoke(_card);
+            //DisplayCard();
         }
     }
 
