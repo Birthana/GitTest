@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &231381954360010419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9149693607984262759}
+  m_Layer: 8
+  m_Name: Stats_Icons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9149693607984262759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231381954360010419}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5883382648382650894}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5199053083362743549
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +215,7 @@ GameObject:
   - component: {fileID: 5883382648382650893}
   - component: {fileID: 5883382648382650892}
   - component: {fileID: 5883382648382650895}
+  - component: {fileID: 3651106986202055353}
   - component: {fileID: -6703108220140409413}
   m_Layer: 8
   m_Name: Card
@@ -207,6 +239,7 @@ Transform:
   - {fileID: 6862402214123955956}
   - {fileID: 279905990640818513}
   - {fileID: 355056090410657362}
+  - {fileID: 9149693607984262759}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -302,6 +335,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: {fileID: 1881171682613204956}
   _card: {fileID: 0}
+--- !u!114 &3651106986202055353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883382648382650891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a05d379ae2a8140a92e2476510f148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconPosition: {fileID: 9149693607984262759}
+  statPrefab: {fileID: 735643029861095864, guid: 6a941202298c5b04e954dec3e02187da, type: 3}
+  icons:
+  - {fileID: 1282908856, guid: 1c692eb5cbab1be4d97150df6075a23c, type: 3}
+  - {fileID: -67738951, guid: 1c692eb5cbab1be4d97150df6075a23c, type: 3}
+  - {fileID: 588510584, guid: 1c692eb5cbab1be4d97150df6075a23c, type: 3}
+  - {fileID: 1457196081, guid: 1c692eb5cbab1be4d97150df6075a23c, type: 3}
+  - {fileID: -507345292, guid: 1c692eb5cbab1be4d97150df6075a23c, type: 3}
+  - {fileID: 1178752871, guid: 1c692eb5cbab1be4d97150df6075a23c, type: 3}
 --- !u!210 &-6703108220140409413
 SortingGroup:
   m_ObjectHideFlags: 0
