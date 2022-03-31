@@ -7,6 +7,8 @@ public class DeckBuilderStatsUI : MonoBehaviour
 {
     public Transform iconPosition;
     public DeckBuilderStat statPrefab;
+    public float CARD_SPACING;
+    public float CARD_SCALING;
     public List<Sprite> icons = new List<Sprite>();
     private List<DeckBuilderStat> stats = new List<DeckBuilderStat>();
 
@@ -36,6 +38,17 @@ public class DeckBuilderStatsUI : MonoBehaviour
 
     public void SetPositions()
     {
-
+        for (int i = 0; i < stats.Count; i++)
+        {
+            float transformAmount = ((float)i) - ((float)stats.Count - 1) / 2;
+            float angle = transformAmount * 3.0f;
+            Vector3 position = new Vector3(
+                Mathf.Sin(angle * Mathf.Deg2Rad),
+                0,
+                0
+                ) * CARD_SPACING;
+            stats[i].gameObject.transform.localPosition = position + iconPosition.localPosition;
+            stats[i].gameObject.transform.localScale = new Vector3(CARD_SCALING, CARD_SCALING);
+        }
     }
 }

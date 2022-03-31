@@ -17,5 +17,5 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 7938f34ae6feed24db121b422b693130, type: 2}
   cardEffect: Deal 15 Damage to target enemy.
-  stat_types: 0200000001000000
-  stat_amount: 0200000002000000
+  stat_types: 020000000100000000000000
+  stat_amount: 020000000200000005000000

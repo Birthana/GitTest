@@ -349,6 +349,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconPosition: {fileID: 9149693607984262759}
   statPrefab: {fileID: 735643029861095864, guid: 6a941202298c5b04e954dec3e02187da, type: 3}
+  CARD_SPACING: 20
+  CARD_SCALING: 0.5
   icons:
   - {fileID: 1282908856, guid: 1c692eb5cbab1be4d97150df6075a23c, type: 3}
   - {fileID: -67738951, guid: 1c692eb5cbab1be4d97150df6075a23c, type: 3}

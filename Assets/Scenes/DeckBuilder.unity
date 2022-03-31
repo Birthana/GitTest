@@ -1230,6 +1230,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1145968752}
     m_Modifications:
+    - target: {fileID: 3651106986202055353, guid: 182b4ed86430cb0468d9c3e2531cd89f, type: 3}
+      propertyPath: CARD_SCALING
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3651106986202055353, guid: 182b4ed86430cb0468d9c3e2531cd89f, type: 3}
+      propertyPath: CARD_SPACING
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5883382648382650891, guid: 182b4ed86430cb0468d9c3e2531cd89f, type: 3}
       propertyPath: m_Name
       value: Card
